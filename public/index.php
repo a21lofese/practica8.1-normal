@@ -1,12 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Prueba</h1>
-</body>
-</html>
+<?php
+require "../bootstrap.php";
+use Src\Controller\ContactosController;
+
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = explode( '/', $uri );
+
+// all of our endpoints start with /contactos
+// everything else results in a 404 Not Found
+if ($uri[1] !== 'contactos') {
+    header("HTTP/1.1 404 Not Found");
+    exit();
+}
+
+// the user id is, of course, optional and must be a number:
+$userId = null;
+if (isset($uri[2])) {
+    $userId = (int) $uri[2];
+}
+
+$requestMethod = $_SERVER["REQUEST_METHOD"];
+
+// pass the request method and user ID to the ContactosController and process the HTTP request:
+$controller = new ContactosController($dbConnection, $requestMethod, $userId);
+$controller->processRequest();
