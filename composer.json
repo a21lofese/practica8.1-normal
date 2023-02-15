@@ -1,10 +1,11 @@
 {
-    "require": {
-        "vlucas/phpdotenv": "^2.4"
-    },
+    "name": "sergi/app",
     "autoload": {
         "psr-4": {
-            "Src\\": "src/"
+            "Sergi\\App\\": "src/"
         }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^2.4"
     }
 }

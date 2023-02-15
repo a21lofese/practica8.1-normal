@@ -1,5 +1,7 @@
 <?php
-namespace Src\Controller;
+namespace Src\Controllers;
+
+require "../TableGateways/ContactoGateway.php";
 
 use Src\TableGateways\ContactoGateway;
 
