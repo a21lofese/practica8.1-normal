@@ -1,11 +1,13 @@
 {
-    "name": "sergi/app",
     "autoload": {
         "psr-4": {
-            "Sergi\\App\\": "src/"
+            "PruebaAPI\\": "app/",
+            "PruebaAPI\\Controllers\\": "app/Controllers/",
+            "PruebaAPI\\Models\\": "app/Models/",
+            "PruebaAPI\\System\\": "System/"
         }
     },
     "require": {
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^5.5"
     }
 }

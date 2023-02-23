@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\TableGateways;
+namespace PruebaAPI\Models;
 
-class ContactoGateway
+class ContactosGateway
 {
 
   private $db = null;
@@ -16,7 +16,7 @@ class ContactoGateway
   {
     $statement = "
             SELECT 
-                *
+                id, nombre, telefono, email, created_at, updated_at
             FROM
                 contactos;
         ";
@@ -34,7 +34,7 @@ class ContactoGateway
   {
     $statement = "
             SELECT 
-                *
+                id, nombre, telefono, email, created_at, updated_at
             FROM
                 contactos
             WHERE id = ?;
@@ -53,7 +53,7 @@ class ContactoGateway
   public function insert(array $input)
   {
     $statement = "
-            INSERT INTO contactos
+            INSERT INTO contactos 
                 (nombre, telefono, email, created_at, updated_at)
             VALUES
                 (:nombre, :telefono, :email, :created_at, :updated_at);
@@ -89,11 +89,11 @@ class ContactoGateway
     try {
       $statement = $this->db->prepare($statement);
       $statement->execute(array(
+        'id' => (int) $id,
         'nombre' => $input['nombre'],
         'telefono'  => $input['telefono'],
         'email' => $input['email'],
         'updated_at' => date("Y-m-d H:i:s"),
-        'id' => (int) $id
       ));
       return $statement->rowCount();
     } catch (\PDOException $e) {
